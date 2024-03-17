@@ -1,0 +1,98 @@
+{% extends "CategoryPage.html" %} {% block data %}
+
+<form
+  action="{% url 'editcatdata' pk=data.id %}"
+  method="post"
+  enctype="multipart/form-data"
+>
+  {% csrf_token %}
+  <div class="col-12 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Edit Category</h4>
+        <p class="card-description">Fill the form to edit categoty</p>
+        <form class="forms-sample">
+          <div class="form-group">
+            <label for="exampleInputName1">Name</label>
+            <input
+              type="text"
+              class="form-control border border-1 p-2"
+              id="exampleInputName1"
+              value="{{data.Name}}"
+              name="name"
+              placeholder="Name"
+            />
+            <br />
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail3">Orginated In</label>
+            <input
+              type="text"
+              class="form-control border border-1 p-2"
+              id="exampleInputEmail3"
+              placeholder="Item origin"
+              value="Orgin"
+              name="orgin"
+            />
+            <br />
+          </div>
+          <div class="form-group">
+            <label>Image upload</label><br />
+            <img
+              src="{{data.Catimg.url}}"
+              alt="img"
+              style="width: 80px; height: 50px; padding-bottom:20px:"
+            />
+            <input
+              type="file"
+              name="image"
+              class="file-upload-default"
+              style="display: none"
+              id="uploadBTN"
+            />
+
+            <div class="input-group col-xs-12">
+              <span
+                type="text"
+                class="form-control file-upload-info border border-1 p-2"
+                id="listtext"
+                placeholder="Upload Image"
+                name="img"
+                >Upload your Category file here</span
+              >
+
+              <span class="input-group-append">
+                <label for="uploadBTN">
+                  <div
+                    class="file-upload-browse btn btn-primary mt-3"
+                    type="button"
+                    onclick="bttn()"
+                  >
+                    Upload
+                  </div>
+                </label>
+              </span>
+            </div>
+          </div>
+          <br />
+          <div class="form-group">
+            <label for="exampleTextarea1">Description</label>
+            <textarea
+              class="form-control border border-1 p-2"
+              id="exampleTextarea1"
+              rows="4"
+              placeholder="description"
+              name="des"
+            >
+{{data.Desc}}</textarea
+            >
+            <br />
+          </div>
+          <button type="submit" class="btn btn-primary mr-2">Submit</button>
+          <button class="btn btn-light">Cancel</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</form>
+{% endblock data %}

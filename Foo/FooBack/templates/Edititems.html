@@ -1,0 +1,141 @@
+{% extends "ItemsPage.html" %} {% block field %}
+<form
+  action="{% url 'saveitemedit' pk=data.id %}"
+  method="post"
+  enctype="multipart/form-data"
+>
+  {% csrf_token %}
+  <div class="col-12 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Edit Item</h4>
+        <p class="card-description">Fill the form to edit Items</p>
+        <form class="forms-sample">
+          <div>
+            <div class="form-group">
+              <label>Select the category</label>
+              <select
+                class="form-control select2-selection border border-1 w-100 select2-hidden-accessible p-2"
+                data-select2-id="1"
+                tabindex="-1"
+                aria-hidden="true"
+                name="cat"
+                selected="{{data.Category}}"
+              >
+                {% for c in cat %}
+                <option {% if data.Category == c.Name  %}selected={{c.Name}}{% endif %} name="cat" data-select2-id="3">{{c.Name}}</option>
+                {% endfor %}
+              </select>
+              <span class="select2-selection__arrow" role="presentation"
+                ><b role="presentation"></b
+              ></span>
+            </div>
+          </div>
+
+          <br />
+          <div class="form-group">
+            <label for="exampleInputName1">Name</label>
+            <input
+              type="text"
+              class="form-control border border-1 p-2"
+              id="exampleInputName1"
+              name="name"
+              placeholder="Name"
+              value="{{data.Name}}"
+            />
+            <br />
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail3">Price</label>
+            <input
+              type="number"
+              class="form-control border border-1 p-2"
+              id="exampleInputEmail3"
+              placeholder="Item Price"
+              name="price"
+              value="{{data.Price}}"
+            />
+            <br />
+          </div>
+          <div class="form-group">
+            <label>Image upload</label>
+            <input
+              type="file"
+              name="image"
+              class="file-upload-default"
+              style="display: none"
+              id="uploadBTN"
+            />
+            <div class="input-group col-xs-12">
+              <span
+                type="text"
+                class="form-control file-upload-info border border-1 p-2"
+                id="listtext"
+                placeholder="Upload Image"
+                name="img"
+                >Upload your Item Image file here</span
+              >
+
+              <span class="input-group-append">
+                <label for="uploadBTN">
+                  <div
+                    class="file-upload-browse btn btn-primary mt-3"
+                    type="button"
+                    onclick="bttn()"
+                  >
+                    Upload
+                  </div>
+                </label>
+              </span>
+            </div>
+          </div>
+          <br />
+          <div class="form-group">
+            <label for="exampleTextarea1">Description</label>
+            <textarea
+              class="form-control border border-1 p-2"
+              id="exampleTextarea1"
+              rows="4"
+              placeholder="description"
+              name="des"
+            >
+{{data.Des}}</textarea
+            >
+            <br />
+          </div>
+          <div class="form-group">
+            <div class="mt-4 text-sm">
+              <span class="text-gray-700 dark:text-gray-400"> Item Type </span>
+              <div class="mt-2">
+                <label
+                  class="inline-flex items-center text-gray-600 dark:text-gray-400"
+                >
+                  <input type="radio" class="px-2 text-purple-600 form-radio
+                  focus:border-purple-400 focus:outline-none
+                  focus:shadow-outline-purple dark:focus:shadow-outline-gray"
+                  name="spice" value="False" {% if data.spice == False %}
+                  checked {% endif %} />
+                  <span class="ml-2">Veg</span>
+                </label>
+                <label
+                  class="inline-flex items-center ml-6 text-gray-600 dark:text-gray-400"
+                >
+                  <input type="radio" class="px-2 text-purple-600 form-radio
+                  focus:border-purple-400 focus:outline-none
+                  focus:shadow-outline-purple dark:focus:shadow-outline-gray"
+                  name="spice" value="True" {% if data.spice == True %} checked
+                  {% endif %} />
+                  <span class="ml-2">Non-Veg</span>
+                </label>
+              </div>
+            </div>
+          </div>
+          <br />
+          <button type="submit" class="btn btn-primary mr-2">Submit</button>
+          <button class="btn btn-light">Cancel</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</form>
+{% endblock field %}
